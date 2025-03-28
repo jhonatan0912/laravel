@@ -17,7 +17,13 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return response()->json(['message' => 'Logged in']);
+            return response()->json(
+                [
+                    'user' => Auth::user(),
+                    'message' => 'Logged in'
+                ],
+                200
+            );
         }
 
         return response()->json(

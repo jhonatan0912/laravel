@@ -36,7 +36,7 @@ const login = async () => {
             email: email.value,
             password: password.value,
         });
-
+        localStorage.setItem("user", JSON.stringify(response.data.user));
         router.push("/dashboard");
     } catch (err) {
         error.value = "Invalid credentials.";

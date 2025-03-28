@@ -1,8 +1,7 @@
-import { createRouter, createWebHistory } from "vue-router";
-import Register from "@views/auth/Register.vue";
 import Login from "@views/auth/Login.vue";
+import Register from "@views/auth/Register.vue";
 import Dashboard from "@views/Dashboard.vue";
-import axios from "axios";
+import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
     { path: "/", redirect: "/register" },
@@ -21,14 +20,17 @@ const router = createRouter({
     routes,
 });
 
-router.beforeEach(async (to, from, next) => {
-    if (to.meta.requiresAuth) {
-        try {
-            await axios.get("/api/user");
-            next();
-        } catch (error) {
-            next("/login");
-        }
+function isAuthenticated() {
+    return !!localStorage.getItem("user");
+}
+
+router.beforeEach((to, from, next) => {
+    const loggedIn = isAuthenticated();
+
+    if ((to.path === "/login" || to.path === "/register") && loggedIn) {
+        next("/dashboard");
+    } else if (to.meta.requiresAuth && !loggedIn) {
+        next("/login");
     } else {
         next();
     }
