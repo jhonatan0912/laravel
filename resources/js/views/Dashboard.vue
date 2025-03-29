@@ -2,9 +2,14 @@
     <section class="w-full p-4">
         <UIHeader @on-create="onCreate" />
         <div class="mt-20">
-            <List :tasks="tasks" @on-reload="onGetRecords" />
+            <List :tasks="tasks" @on-edit="onEdit" @on-reload="onGetRecords" />
 
-            <Form v-model="showForm" @on-reload="onGetRecords" />
+            <Form
+                v-model="showForm"
+                :task="task"
+                @update:task="task = $event"
+                @on-reload="onGetRecords"
+            />
         </div>
     </section>
 </template>
@@ -25,6 +30,7 @@ export default {
         return {
             showForm: false,
             tasks: [],
+            task: null,
         };
     },
 
@@ -35,6 +41,10 @@ export default {
     methods: {
         onCreate() {
             this.showForm = true;
+        },
+        onEdit(task) {
+            this.showForm = true;
+            this.task = task;
         },
         async onGetRecords() {
             const response = await axios.get("/tasks");

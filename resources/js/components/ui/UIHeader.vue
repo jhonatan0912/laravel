@@ -11,13 +11,13 @@
                         >Crear tarea</el-button
                     >
                 </li>
-                <li class="font-semibold hover:underline hover:cursor-pointer">
-                    Profile
-                </li>
                 <li>
                     <el-button @click="onLogout" type="danger"
                         >Logout</el-button
                     >
+                </li>
+                <li class="font-semibold hover:underline hover:cursor-pointer">
+                    Profile
                 </li>
             </ul>
         </nav>

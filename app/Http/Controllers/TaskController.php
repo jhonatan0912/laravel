@@ -87,9 +87,29 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, string $taskId)
     {
-        //
+        $task = Task::find($taskId);
+
+        if (!$task) {
+
+            return response()->json(
+                ['message' => 'Task not found'],
+                404
+            );
+        }
+
+        $task->name = $request->name;
+        $task->description = $request->description;
+        $task->completed = $request->completed ?? false;
+        $task->priority = $request->priority;
+
+        $task->save();
+
+        return response()->json(
+            ['message' => 'Task updated successfully'],
+            200
+        );
     }
 
     /**

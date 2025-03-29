@@ -4,6 +4,7 @@
             v-for="task in tasks"
             :key="task.id"
             :task="task"
+            @on-edit="onEdit"
             @on-delete="onDelete"
         />
     </section>
@@ -29,6 +30,9 @@ export default {
     },
 
     methods: {
+        onEdit(task) {
+            this.$emit("on-edit", task);
+        },
         async onDelete(task) {
             try {
                 const response = await axios.delete(`/tasks/${task.id}`);
