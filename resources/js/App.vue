@@ -1,18 +1,12 @@
 <template>
-    <main class="container">
+    <main class="app__container">
         <router-view />
-
-        <ProfileDialog v-model="showProfileDialog" />
     </main>
 </template>
 
-<script setup>
-import { ref } from "vue";
-
-const showProfileDialog = ref(true);
-</script>
+<script setup></script>
 <style>
-.container {
+.app__container {
     width: 100%;
     height: 100%;
     display: flex;

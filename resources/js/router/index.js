@@ -5,11 +5,11 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
     { path: "/", redirect: "/register" },
-    { path: "/register", name: "Register", component: Register },
-    { path: "/login", name: "Login", component: Login },
+    { path: "/register", name: "register", component: Register },
+    { path: "/login", name: "login", component: Login },
     {
         path: "/dashboard",
-        name: "Dashboard",
+        name: "dashboard",
         component: Dashboard,
         meta: { requiresAuth: true },
     },

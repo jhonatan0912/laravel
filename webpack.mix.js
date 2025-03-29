@@ -24,6 +24,7 @@ mix.webpackConfig({
         extensions: [".js", ".vue"],
         alias: {
             "@views": path.resolve(__dirname, "resources/js/views"),
+            "@components": path.resolve(__dirname, "resources/js/components"),
         },
     },
 });

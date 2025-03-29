@@ -1,15 +1,19 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+:root {
+    --el-color-primary: #006ADB !important;
+    --el-color-success: #32B375 !important;
+    --el-color-warning: #DEA722 !important;
+    --el-color-danger: #ED3A37 !important;
+    --el-color-info: #1588F2 !important;
+  }
+  
 body {
+    box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.5;
     color: #333;
 }
+
 #app{
     max-width: 100vw;
     max-height: 100vh;
