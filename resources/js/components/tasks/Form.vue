@@ -1,6 +1,11 @@
 <template>
     <el-dialog @open="onOpen" @close="onClose" :title="title">
-        <el-form>
+        <el-form
+            :model="form"
+            :rules="rules"
+            ref="taskForm"
+            @submit.native.prevent="onSubmit"
+        >
             <el-form-item label="Nombre">
                 <el-input v-model="form.name"></el-input>
             </el-form-item>
@@ -30,15 +35,19 @@
 
         <template #footer>
             <div class="dialog-footer">
-                <el-button @click="onClose">Cancelar</el-button>
-                <el-button type="primary" @click="onSubmit">Crear</el-button>
+                <el-button @click="onClose" :loading="loading">
+                    Cancelar
+                </el-button>
+                <el-button type="primary" @click="onSubmit" :loading="loading">
+                    {{ task ? "Actualizar" : "Crear" }}
+                </el-button>
             </div>
         </template>
     </el-dialog>
 </template>
 
 <script>
-import { TASK_PRIORITIES } from "@constants/tasks";
+import { TASK_PRIORITIES, RULES } from "@constants/tasks";
 import taskService from "@services/tasks";
 
 export default {
@@ -59,6 +68,7 @@ export default {
                 priority: "low",
             },
             priorities: TASK_PRIORITIES,
+            rules: RULES,
         };
     },
 
@@ -89,11 +99,19 @@ export default {
             this.$emit("update:model-value", false);
         },
 
-        onSubmit() {
-            if (this.task) {
-                this.onUpdate();
-            } else {
-                this.onCreate();
+        async onSubmit() {
+            try {
+                const valid = await this.$refs.taskForm.validate();
+
+                if (!valid) return;
+
+                if (this.task) {
+                    this.onUpdate();
+                } else {
+                    this.onCreate();
+                }
+            } catch (error) {
+                console.log(error);
             }
         },
 

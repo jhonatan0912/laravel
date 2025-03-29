@@ -1,6 +1,5 @@
 <template>
-    <section class="w-full p-4">
-        <UIHeader @on-create="onCreate" />
+    <section>
         <div class="mt-20">
             <List :tasks="tasks" @on-edit="onEdit" @on-reload="onGetRecords" />
 
@@ -15,13 +14,11 @@
 </template>
 
 <script>
-import UIHeader from "@components/ui/UIHeader.vue";
 import Form from "@components/tasks/Form.vue";
 import List from "@components/tasks/List.vue";
 
 export default {
     components: {
-        UIHeader,
         Form,
         List,
     },

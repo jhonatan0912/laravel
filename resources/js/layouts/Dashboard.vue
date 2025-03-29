@@ -1,9 +1,18 @@
 <template>
-    <div></div>
+    <section class="w-full">
+        <UIHeader />
+        <router-view />
+    </section>
 </template>
 
 <script>
-export default {};
+import UIHeader from "@components/ui/UIHeader.vue";
+
+export default {
+    components: {
+        UIHeader,
+    },
+};
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

@@ -1,6 +1,6 @@
 <template>
     <header
-        class="flex items-center justify-between p-6 bg-white shadow-md rounded-md fixed top-0 left-0 w-full"
+        class="flex items-center justify-between p-6 bg-white shadow-md rounded-md"
     >
         <h1 class="font-extrabold text-2xl">Laravel vue App</h1>
 
